@@ -1,34 +1,32 @@
-CREATE TABLE book(
-    book_id INT PRIMARY KEY,
-    title VARCHAR(100) NOT NULL,
-    author_name VARCHAR(50),
-    price INT CHECK(price>0),
-    stock INT CHECK(stock>0)
+CREATE DATABASE library;
+USE library;
+
+CREATE TABLE books(
+book_id INT PRIMARY KEY,
+title VARCHAR(100) NOT NULL,
+author_name VARCHAR(50),
+price INT CHECK (price > 0),
+stock INT CHECK (stock >= 0)
 );
 
-INSERT INTO book(book_id,title,author_name,price,stock)
-VALUES
-(101, 'Lord of the Mysteries', 'Cuttlefish that loves diving', 500, 10),
-(102, 'Dragon Ball', 'Akira Toriyama', 300, 15),
-(103, 'Tower of God', 'SIU', 500, 20),
-(104, 'One Piece', 'Eichiro Oda', 400, 12),
-(105, 'Harry Potter:The Prisoner of Azkaban', 'JK Rowling', 600, 34);
+INSERT INTO books (book_id, title, author_name, price, stock)
+VALUE
+(101, 'Lord of the Mysteries', 'Cuttlefish that loves to dive', 1000, 14),
+(102, 'Dragon Ball', 'Akira Toriyama', 1200, 78),
+(103, 'Naruto', 'Mashashi Kishimoto', 1001, 56);
 
+SELECT * FROM books WHERE price > 1000;
 
-SELECT * FROM book WHERE stock > 15;
+UPDATE books
+SET stock = 100
+WHERE book_id = 103;
 
+INSERT INTO books(book_id, title, author_name, price, stock)
+VALUE
+(104, 'Steel Ball Run', 'Hirohiko Araki', 1400, 80);
 
-SELECT * FROM book ORDER BY price desc;
+UPDATE books
+SET stock = 78
+WHERE book_id = 101;
 
-UPDATE book
-SET price = 1000
-WHERE book_id = 102;
-
-INSERT INTO book(book_id,title,author_name,price,stock)
-VALUES
-(106, 'CRETED TO GET DELETED', 'THE DELETER', 1, 1);
-
-DELETE FROM book
-WHERE book_id = 106;
-
-SELECT COUNT(*) FROM book where price = 1000;
+SELECT COUNT(*) FROM books WHERE Stock >= 50;
